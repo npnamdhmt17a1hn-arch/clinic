@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthSync Clinic - Quản Lý & Chăm Sóc Sức Khỏe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/logo.png">
+    <meta name="description" content="Đặt lịch, quản lý hồ sơ và chăm sóc sức khỏe toàn diện tại HealthSync Clinic.">
+    <meta content="Free HTML Templates" name="keywords">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- PHẦN HEADER CŨ (GIỮ NGUYÊN) -->
+    <header class="site-header">
+        <div class="header-inner container-wide">
+            <a href="index.html" class="brand-link">
+                <img src="images/logo.png" alt="Logo" class="logo-sm">
+                <span class="brand-name">Phòng khám Đông Đô</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="#about">Giới Thiệu</a>
+                <a href="#news">Tin Tức</a>
+                <a href="#services">Dịch Vụ</a>
+                <a href="#doctors">Đội Ngũ Bác Sĩ</a>
+                <a href="#contact">Liên Hệ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="login.html" class="btn btn-link">Đăng nhập</a>
+                <a href="register.html" class="btn btn-primary">ĐĂNG KÝ</a>
+            </div>
+
+            <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Mở menu">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner" style="background-image: url('images/hero.jpg');">
+            <div class="hero-overlay"></div>
+            <div class="hero-content container-wide">
+                <h1 class="hero-title">SỨC KHỎE CỦA BẠN — CHÚNG TÔI ĐỒNG HÀNH</h1>
+                <p class="hero-subtitle">Đặt lịch nhanh chóng, quản lý hồ sơ và chăm sóc toàn diện bởi đội ngũ chuyên
+                    môn hàng đầu.</p>
+                <div class="hero-ctas">
+                    <a href="login.html" class="btn btn-primary btn-large">ĐẶT LỊCH KHÁM NGAY</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section-container bg-light">
+            <h2 class="section-title">Dịch Vụ Chuyên Khoa Của Chúng Tôi</h2>
+            <div class="services-grid container-wide">
+                <div class="service-card border-primary">
+                    <div class="service-icon">🫀</div>
+                    <h4>Nội Tổng Quát</h4>
+                    <p>Khám và điều trị tổng quát cho mọi lứa tuổi, chăm sóc toàn diện.</p>
+                    <a href="#" class="service-link text-primary">Xem chi tiết &rarr;</a>
+                </div>
+                <div class="service-card border-secondary">
+                    <div class="service-icon text-secondary">👶</div>
+                    <h4>Nhi Khoa</h4>
+                    <p>Theo dõi sức khỏe trẻ em, tiêm chủng và tư vấn dinh dưỡng.</p>
+                    <a href="#" class="service-link text-secondary">Xem chi tiết &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="doctors" class="section-container">
+
+            <style>
+                .doctor-img-wrapper {
+                    width: 100%;
+                    height: 320px;
+                    overflow: hidden;
+                    border-radius: 12px 12px 0 0;
+                }
+
+                .doctor-img-wrapper img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center 15%;
+                    display: block;
+                }
+            </style>
+
+            <h2 class="section-title">Đội Ngũ Bác Sĩ Chuyên Môn</h2>
+
+            <div class="doctors-grid container-wide">
+
+                <div class="doctor-card">
+                    <div class="doctor-img-wrapper">
+                        <img src="images/doctorA.jpg" alt="Bác sĩ A">
+                    </div>
+                    <h4>BS. Nguyễn Văn A</h4>
+                    <p class="specialty">Nội Tổng Quát & Tim Mạch</p>
+                    <a href="doctors.html" class="btn btn-outline-primary btn-sm">
+                        Xem chi tiết
+                    </a>
+                </div>
+
+                <div class="doctor-card">
+                    <div class="doctor-img-wrapper">
+                        <img src="images/doctorB.jpg" alt="Bác sĩ B">
+                    </div>
+                    <h4>BS. Trần Thị B</h4>
+                    <p class="specialty">Nhi Khoa & Dinh Dưỡng</p>
+                    <a href="doctors.html" class="btn btn-outline-primary btn-sm">
+                        Xem chi tiết
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="doctors.html" class="btn btn-primary">
+                    Xem Toàn Bộ Đội Ngũ Bác Sĩ
+                </a>
+            </div>
+        </section>
+
+
+        <section id="news" class="section-container bg-light">
+            <h2 class="section-title">Tin Tức & Kiến Thức Sức Khỏe</h2>
+            <div class="news-grid container-wide">
+                <article class="news-card">
+                    <img src="images/news-placeholder-1.jpg" alt="Tiêu đề tin tức 1" class="news-img">
+                    <div class="news-content-box">
+                        <span class="news-date">20/11/2025</span>
+                        <h3 class="news-title-sm">10 Lời Khuyên Giúp Tăng Cường Miễn Dịch</h3>
+                        <a href="news.html" class="read-more-link">Đọc thêm &rarr;</a>
+                    </div>
+                </article>
+            </div>
+            <div class="text-center mt-12">
+                <a href="news.html" class="btn btn-secondary-outline">Xem Tất Cả Bài Viết</a>
+            </div>
+        </section>
+
+        <section id="about" class="section-container container-wide" style="position: relative;">
+
+            <!-- LỚP NỀN ĐỠ TEXT -->
+            <div style="
+        background: rgba(255,255,255,0.88);
+        padding: 48px 24px;
+        border-radius: 16px;
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+    ">
+
+                <h2 style="
+            color: #0b5ed7;
+            font-weight: 700;
+            margin-bottom: 20px;
+        ">
+                    Về Chúng Tôi: Chất Lượng & Tận Tâm
+                </h2>
+
+                <p style="
+            color: #212529;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 850px;
+            margin: 0 auto 28px;
+        ">
+                    HealthSync Clinic cam kết cung cấp dịch vụ y tế chất lượng cao, lấy bệnh
+                    nhân làm trung tâm, với trang thiết bị hiện đại và đội ngũ bác sĩ giàu kinh nghiệm.
+                </p>
+
+                <a href="about.html" class="btn btn-outline-primary">
+                    Xem Chi Tiết Giới Thiệu
+                </a>
+
+            </div>
+        </section>
+
+
+    </main>
+
+
+
+
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary m-1" role="status">
+            <span class="sr-only">Đang tải...</span>
+        </div>
+        <div class="spinner-grow text-dark m-1" role="status">
+            <span class="sr-only">Đang tải...</span>
+        </div>
+        <div class="spinner-grow text-secondary m-1" role="status">
+            <span class="sr-only">Đang tải...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Service Start (ĐÃ DỊCH) -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-5 wow zoomIn" data-wow-delay="0.3s" style="min-height: 400px;">
+                    <div class="h-100 position-relative">
+                        <img class="position-absolute w-100 h-100" src="img/about.jpg" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="section-title mb-5">
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Dịch Vụ Của Chúng Tôi
+                        </h5>
+                        <h1 class="display-5 mb-0">Cung Cấp Dịch Vụ Khám Bệnh Chất Lượng Cao</h1>
+                    </div>
+                    <div class="row g-5">
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/service-1.png" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Nhi Khoa</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.9s">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/service-2.png" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Tim Mạch</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-7">
+                    <div class="row g-5">
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.3s">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/service-3.png" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Nha Khoa</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/service-4.png" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Phục Hồi Chức Năng</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 service-item wow zoomIn" data-wow-delay="0.9s">
+                    <div
+                        class="position-relative bg-primary rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-4">
+                        <h3 class="text-white mb-3">Đặt Lịch Hẹn</h3>
+                        <p class="text-white mb-3">Liên hệ ngay để được tư vấn và hỗ trợ nhanh chóng từ đội ngũ chuyên
+                            gia của chúng tôi.</p>
+                        <h2 class="text-white mb-0">+012 345 6789</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+
+    <!-- Team Start (ĐÃ DỊCH) -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.1s">
+                    <div class="section-title bg-light rounded h-100 p-5">
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Bác Sĩ Của Chúng Tôi
+                        </h5>
+                        <h1 class="display-6 mb-4">Gặp Gỡ Đội Ngũ Bác Sĩ Giàu Kinh Nghiệm & Có Chứng Chỉ</h1>
+                        <a href="login.html" class="btn btn-primary py-3 px-5">Đặt Lịch</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+                    <div class="team-item">
+                        <div class="position-relative rounded-top" style="z-index: 1;">
+                            <img class="img-fluid rounded-top w-100" src="img/team-1.jpg" alt="">
+                            <div
+                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
+                                <a class="btn btn-primary btn-square m-1" href="#"><i
+                                        class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i
+                                        class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i
+                                        class="fab fa-linkedin-in fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i
+                                        class="fab fa-instagram fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
+                            <h4 class="mb-2">BS. John Doe</h4>
+                            <p class="text-primary mb-0">Phẫu Thuật Implant</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+                    <div class="team-item">
+                        <div class="position-relative rounded-top" style="z-index: 1;">
+                            <img class="img-fluid rounded-top w-100" src="img/team-2.jpg" alt="">
+                            <div
+                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
+                                <a class="btn btn-primary btn-square m-1" href="#"><i
+                                        class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i
+                                        class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i
+                                        class="fab fa-linkedin-in fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i
+                                        class="fab fa-instagram fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
+                            <h4 class="mb-2">BS. John Doe</h4>
+                            <p class="text-primary mb-0">Phẫu Thuật Implant</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Các item team tiếp theo (nếu có) tương tự -->
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+
+    <!-- Contact Start (ĐÃ DỊCH) -->
+    <div id="contact"class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded h-100 p-5">
+                        <div class="section-title">
+                            <h5 class="position-relative d-inline-block text-primary text-uppercase">Liên Hệ</h5>
+                            <h1 class="display-6 mb-4">Đừng Ngần Ngại Liên Hệ Với Chúng Tôi</h1>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-geo-alt fs-1 text-primary me-3"></i>
+                            <div class="text-start">
+                                <h5 class="mb-0">Văn Phòng</h5>
+                                <span>123 Đường ABC, Hà Nội, VN</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-envelope-open fs-1 text-primary me-3"></i>
+                            <div class="text-start">
+                                <h5 class="mb-0">Email</h5>
+                                <span>info@example.com</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
+                            <div class="text-start">
+                                <h5 class="mb-0">Hotline</h5>
+                                <span>+012 345 6789</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.3s">
+                    <h4 class="mb-4">Gửi tin nhắn cho chúng tôi để được tư vấn miễn phí.</h4>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <input type="text" class="form-control border-0 bg-light px-4" placeholder="Tên của bạn"
+                                    style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <input type="email" class="form-control border-0 bg-light px-4"
+                                    placeholder="Email của bạn" style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control border-0 bg-light px-4" placeholder="Tiêu đề"
+                                    style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control border-0 bg-light px-4 py-3" rows="5"
+                                    placeholder="Nội dung tin nhắn"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Gửi Tin Nhắn</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xl-4 col-lg-12 wow slideInUp" data-wow-delay="0.6s">
+                    <iframe class="position-relative rounded w-100 h-100"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.5870113357096!2d105.83560651032231!3d21.00918568837081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab879ce1e1bf%3A0x20701bea7de20877!2zQuG7h25oIHZp4buHbiDEkMO0bmcgxJDDtA!5e0!3m2!1svi!2sus!4v1765553376642!5m2!1svi!2sus"
+                        frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
+                        tabindex="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+    <!-- Newsletter Start (ĐÃ DỊCH) -->
+    <div class="container-fluid position-relative pt-5 wow fadeInUp" data-wow-delay="0.1s" style="z-index: 1;">
+        <div class="container">
+            <div class="bg-primary p-5">
+                <form class="mx-auto" style="max-width: 600px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-white p-3" placeholder="Email của bạn">
+                        <button class="btn btn-dark px-4">Đăng Ký</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Newsletter End -->
+
+
+    <!-- Footer Start (ĐÃ DỊCH) -->
+    <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
+        <div class="container pt-5">
+            <div class="row g-5 pt-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Liên Kết Nhanh</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Trang
+                            Chủ</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Giới
+                            Thiệu</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Dịch
+                            Vụ</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Blog Mới
+                            Nhất</a>
+                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Liên Hệ</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Liên Kết Phổ Biến</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Trang
+                            Chủ</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Giới
+                            Thiệu</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Dịch
+                            Vụ</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Blog Mới
+                            Nhất</a>
+                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Liên Hệ</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Thông Tin Liên Hệ</h3>
+                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Đường ABC, Hà Nội, VN</p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>info@example.com</p>
+                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Theo Dõi</h3>
+                    <div class="d-flex">
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i
+                                class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i
+                                class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i
+                                class="fab fa-linkedin-in fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i
+                                class="fab fa-instagram fw-normal"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-light py-4" style="background: #051225;">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Tên Website</a>. Bảo lưu mọi
+                        quyền.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

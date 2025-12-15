@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthSync - Đăng Nhập Tài Khoản</title>
+
+    <!-- GIỮ LẠI GIAO DIỆN CŨ -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/logo.png">
+
+    <!-- DÙNG TAILWIND CHO MỘT SỐ KIỂU MỚI (KHÔNG ẢNH HƯỞNG CSS CŨ) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; }
+    </style>
+</head>
+
+<body class="auth-body">
+
+    <div class="auth-container">
+        
+        <!-- HEADER + LOGO GIỐNG CŨ -->
+        <header class="auth-header">
+            <a href="index.html" class="brand-link-center">
+                <img src="images/logo.png" alt="Logo" class="logo-lg">
+                <span class="brand-name">HealthSync Clinic</span>
+            </a>
+        </header>
+
+        <!-- KHUNG LOGIN -->
+        <div class="auth-card">
+
+            <h2 class="auth-title">Đăng Nhập Tài Khoản</h2>
+            <p class="auth-subtitle">Chào mừng bạn trở lại HealthSync Clinic.</p>
+
+            <!-- Hộp thông báo -->
+            <div id="messageBox" class="hidden mb-4 p-3 rounded text-sm font-bold text-center"></div>
+
+            <!-- FORM LOGIN (CŨ) nhưng xử lý JS mới -->
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="username">Email hoặc Tên đăng nhập</label>
+                    <input type="text" id="username" name="username"
+                        class="w-full px-3 py-2 border rounded"
+                        placeholder="Nhập email hoặc tên đăng nhập">
+                    <p id="error-username" class="text-red-500 text-xs italic mt-1 hidden"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password"
+                        class="w-full px-3 py-2 border rounded"
+                        placeholder="Nhập mật khẩu">
+                    <p id="error-password" class="text-red-500 text-xs italic mt-1 hidden"></p>
+                </div>
+
+                <button type="submit" id="btnSubmit"
+                    class="btn btn-primary btn-large w-full mt-4 bg-blue-600 hover:bg-blue-700 transition">
+                    ĐĂNG NHẬP
+                </button>
+            </form>
+
+            <div class="auth-footer-link">
+                Bạn chưa có tài khoản?
+                <a href="register.html" class="text-primary font-bold">Đăng ký ngay</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!--  JAVASCRIPT LOGIN MỚI     -->
+    <!-- ========================= -->
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const messageBox   = document.getElementById('messageBox');
+        const btnSubmit    = document.getElementById('btnSubmit');
+
+        function showMessage(msg, type) {
+            messageBox.textContent = msg;
+            messageBox.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+            if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'text-red-700');
+            } else {
+                messageBox.classList.add('bg-green-100', 'text-green-700');
+            }
+        }
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            document.getElementById('error-username').classList.add('hidden');
+            document.getElementById('error-password').classList.add('hidden');
+            messageBox.classList.add('hidden');
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            let hasError = false;
+
+            if (username === "") {
+                const err = document.getElementById('error-username');
+                err.textContent = "Vui lòng nhập tên đăng nhập.";
+                err.classList.remove('hidden');
+                hasError = true;
+            }
+
+            if (password === "") {
+                const err = document.getElementById('error-password');
+                err.textContent = "Vui lòng nhập mật khẩu.";
+                err.classList.remove('hidden');
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            btnSubmit.textContent = "Đang xử lý...";
+            btnSubmit.disabled = true;
+
+            const API_URL = "http://localhost/DB/login.php";
+
+            fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Không kết nối được với login.php");
+                return res.json();
+            })
+            .then(data => {
+                if (data.success) {
+
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                    const role = data.user.role;
+
+                    if (role === "doctor") {
+                        window.location.href = "doctor_dashboard.html";
+                    } else if (role === "patient") {
+                        window.location.href = "patient_dashboard.html";
+                    } else if (role === "admin") {
+                        window.location.href = "admin_dashboard.html";
+                    }
+
+                } else {
+                    showMessage(data.message, "error");
+                }
+            })
+            .catch(err => {
+                showMessage("Lỗi kết nối: " + err.message, "error");
+            })
+            .finally(() => {
+                btnSubmit.textContent = "ĐĂNG NHẬP";
+                btnSubmit.disabled = false;
+            });
+        });
+    </script>
+
+</body>
+</html>

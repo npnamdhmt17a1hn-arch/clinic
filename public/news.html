@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin Tức & Thành Tựu | HealthSync Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/logo.png">
+    <meta name="description" content="Các tin tức mới nhất và những thành tựu nổi bật của HealthSync Clinic.">
+
+    <style>
+        /* CSS nội bộ (Inline CSS) cho trang News để tùy chỉnh một chút bố cục */
+        .news-header-banner {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .news-header-banner h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+        .news-header-banner p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .all-news-grid {
+            /* Sử dụng lại news-grid nhưng có thể tùy chỉnh thêm */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .news-article-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .news-article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-article-card .news-img {
+            height: 220px;
+        }
+
+        .news-content-box .news-title-sm {
+            /* Tăng kích thước tiêu đề bài viết */
+            font-size: 1.3rem;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Responsive cho trang News */
+        @media (max-width: 600px) {
+            .news-header-banner {
+                padding: 3rem 0;
+            }
+            .news-header-banner h1 {
+                font-size: 2rem;
+            }
+            .news-header-banner p {
+                font-size: 0.95rem;
+            }
+            .all-news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-inner container-wide">
+            <a href="index.html" class="brand-link">
+                <img src="images/logo.png" alt="Logo" class="logo-sm">
+                <span class="brand-name">HealthSync Clinic</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="index.html#about">Giới Thiệu</a>
+                <a href="#news" class="active-link">Tin Tức</a>
+                <a href="index.html#services">Dịch Vụ</a>
+                <a href="index.html#doctors">Đội Ngũ Bác Sĩ</a>
+                <a href="index.html#contact">Liên Hệ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="login.html" class="btn btn-link">Đăng nhập</a>
+                <a href="register.html" class="btn btn-primary">ĐĂNG KÝ</a>
+            </div>
+
+            <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Mở menu">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="news-header-banner">
+            <div class="container-wide">
+                <h1>Tin Tức & Thành Tựu Nổi Bật</h1>
+                <p>Cập nhật những hoạt động, kiến thức và thành tựu y khoa mới nhất tại HealthSync Clinic.</p>
+            </div>
+        </section>
+
+        <section id="news-list" class="section-container">
+            <div class="all-news-grid container-wide">
+                
+                <article class="news-article-card">
+                    <img src="images/news-placeholder-2.jpg" alt="HealthSync nhận giải thưởng chất lượng" class="news-img">
+                    <div class="news-content-box">
+                        <div class="news-meta">
+                            <span>🏆 Thành tựu</span>
+                            <span>25/11/2025</span>
+                        </div>
+                        <h3 class="news-title-sm mb-4">HealthSync Clinic Nhận Giải 'Phòng Khám Chất Lượng Cao' Năm 2025</h3>
+                        <p>Với sự nỗ lực không ngừng, HealthSync tự hào được vinh danh là đơn vị có chất lượng dịch vụ và cơ sở vật chất hàng đầu khu vực.</p>
+                        <a href="#" class="read-more-link">Xem chi tiết &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="news-article-card">
+                    <img src="images/news-placeholder-1.jpg" alt="Lời khuyên tăng cường miễn dịch" class="news-img">
+                    <div class="news-content-box">
+                        <div class="news-meta">
+                            <span>💡 Kiến thức</span>
+                            <span>20/11/2025</span>
+                        </div>
+                        <h3 class="news-title-sm mb-4">10 Lời Khuyên Vàng Giúp Tăng Cường Hệ Miễn Dịch Trong Mùa Đông</h3>
+                        <p>Các chuyên gia của chúng tôi chia sẻ những mẹo đơn giản để giữ gìn sức khỏe cho cả gia đình bạn.</p>
+                        <a href="#" class="read-more-link">Xem chi tiết &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="news-article-card">
+                    <img src="images/news-placeholder-3.jpg" alt="Chương trình khám miễn phí" class="news-img">
+                    <div class="news-content-box">
+                        <div class="news-meta">
+                            <span>📣 Hoạt động</span>
+                            <span>10/11/2025</span>
+                        </div>
+                        <h3 class="news-title-sm mb-4">Chương Trình Khám Sức Khỏe Cộng Đồng Miễn Phí Tại Quận 1</h3>
+                        <p>HealthSync Clinic đã tổ chức thành công chương trình hỗ trợ khám và tư vấn sức khỏe miễn phí cho hơn 500 người dân.</p>
+                        <a href="#" class="read-more-link">Xem chi tiết &rarr;</a>
+                    </div>
+                </article>
+
+            </div>
+            
+            <div class="text-center mt-12">
+                 <button class="btn btn-secondary-outline">Tải thêm bài viết</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner container-wide">
+            <div class="footer-bottom">
+                &copy; <span id="year-footer">2023</span> HealthSync Clinic. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cập nhật năm hiện tại
+        document.getElementById('year-footer').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthSync - Đăng Ký Tài Khoản</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/logo.png">
+</head>
+
+<body class="auth-body">
+
+    <div class="auth-container">
+        <header class="auth-header">
+            <a href="index.html" class="brand-link-center">
+                <img src="images/logo.png" alt="Logo" class="logo-lg">
+                <span class="brand-name">HealthSync Clinic</span>
+            </a>
+        </header>
+
+        <div class="auth-card">
+            <h2 class="auth-title">Tạo Tài Khoản Mới</h2>
+            <p class="auth-subtitle">Tham gia HealthSync để quản lý sức khỏe toàn diện.</p>
+
+            <form action="/register-submit" method="POST" class="auth-form">
+
+                <div class="form-group">
+                    <label for="fullname">Họ và Tên</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên của bạn" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">username</label>
+                    <input type="text" id="username" name="username" placeholder="Nhập username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Địa chỉ Email</label>
+                    <input type="email" id="email" name="email" placeholder="Ví dụ: hoten@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Mật khẩu (tối thiểu 8 ký tự)"
+                        required minlength="8">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Xác nhận Mật khẩu</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Nhập lại mật khẩu"
+                        required minlength="8">
+                </div>
+
+                <div class="form-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">Tôi đồng ý với <a href="#" class="text-primary">Điều khoản dịch vụ</a>.</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large w-full mt-4">ĐĂNG KÝ NGAY</button>
+            </form>
+
+            <div class="auth-footer-link">
+                Bạn đã có tài khoản? <a href="login.html" class="text-primary font-bold">Đăng nhập ngay</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const form = document.querySelector(".auth-form");
+        const btn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            // Lấy giá trị
+            const fullname = document.getElementById("fullname").value.trim();
+            const usernameInput = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const pass = document.getElementById("password").value.trim();
+            const confirmPass = document.getElementById("confirm-password").value.trim();
+
+            // VALIDATE cơ bản (frontend)
+            if (!fullname || !email || !pass || !confirmPass) {
+                showMessage("Vui lòng điền đầy đủ thông tin.", "error");
+                return;
+            }
+
+            if (pass.length < 8) {
+                showMessage("Mật khẩu phải có ít nhất 8 ký tự.", "error");
+                return;
+            }
+
+            if (pass !== confirmPass) {
+                showMessage("❌ Mật khẩu và xác nhận mật khẩu không khớp!", "error");
+                return;
+            }
+
+            // Chuẩn bị dữ liệu gửi lên (ở DB bạn chỉ có username,email,password,role)
+            // Sử dụng input username nếu người dùng nhập, ngược lại lấy phần trước @ của email
+            const usernameToSend = usernameInput || (email.includes("@") ? email.split("@")[0] : email);
+
+            const payload = {
+                username: usernameToSend,
+                email: email,
+                password: pass
+            };
+
+            try {
+                // Disable button tránh submit nhiều lần
+                btn.disabled = true;
+                btn.textContent = "Đang gửi...";
+
+                const res = await fetch("http://localhost/DB/register.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                // Nếu server trả HTML lỗi, res.json() sẽ ném lỗi -> đi catch
+                const data = await res.json();
+
+                if (data.success) {
+                    showMessage(data.message || "Đăng ký thành công!", "success");
+                    setTimeout(() => { window.location.href = "login.html"; }, 1200);
+                } else {
+                    showMessage(data.message || "Đăng ký thất bại.", "error");
+                }
+            } catch (err) {
+                console.error(err);
+                showMessage("Lỗi kết nối server!", "error");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "ĐĂNG KÝ NGAY";
+            }
+        });
+    </script>
+
+    <!-- Giữ hàm showMessage, hoặc thay bằng alert nếu bạn muốn -->
+    <script>
+        function showMessage(message, type = 'info') {
+            // Nếu bạn đã có style .message-box trong CSS thì dùng class đó, còn không ta tạo nhanh
+            let box = document.createElement("div");
+            box.className = "message-box " + type;
+            box.innerText = message;
+            // style tạm nếu chưa có trong CSS
+            box.style.position = "fixed";
+            box.style.top = "20px";
+            box.style.right = "20px";
+            box.style.padding = "10px 14px";
+            box.style.borderRadius = "6px";
+            box.style.zIndex = 9999;
+            box.style.color = "#fff";
+            box.style.fontWeight = "600";
+            if (type === "success") box.style.background = "#16a34a";
+            else if (type === "error") box.style.background = "#dc2626";
+            else box.style.background = "#0ea5e9";
+
+            document.body.appendChild(box);
+            setTimeout(() => box.remove(), 3000);
+        }
+    </script>
+
+
+</body>
+
+</html>

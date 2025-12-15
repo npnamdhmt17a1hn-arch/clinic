@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Bệnh Nhân | HealthSync Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ======================================================= */
+        /* BIẾN SỐ CHUNG CHO DASHBOARD BỆNH NHÂN */
+        /* ======================================================= */
+        :root {
+            --color-primary-patient: #3B82F6;
+            /* Màu chính: Blue (Xanh dương) */
+            --color-secondary-patient: #F59E0B;
+            /* Màu phụ: Amber */
+            --color-accent-patient: #10B981;
+            /* Màu nhấn: Emerald/Green */
+            --color-text-dark: #1F2937;
+            --color-text-light: #4B5563;
+            --color-background-light: #F9FAFB;
+            --dark: #091E3E;
+            /* Màu nền Header */
+        }
+
+        /* ======================================================= */
+        /* 1. BỐ CỤC CHÍNH */
+        /* ======================================================= */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 120px);
+        }
+
+        .sidebar {
+            background-color: white;
+            padding: 1.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        /* Nav Links */
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0.5rem;
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-weight: 500;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-nav li a i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+            color: var(--color-text-light);
+        }
+
+        /* Active/Hover State */
+        .sidebar-nav li a:hover,
+        .sidebar-nav li a.active {
+            background-color: #EBF5FF;
+            /* Màu nền nhẹ của Blue */
+            color: var(--color-primary-patient);
+        }
+
+        .sidebar-nav li a.active i {
+            color: var(--color-primary-patient);
+        }
+
+
+        .content-area {
+            padding: 1rem 0;
+        }
+
+        .subsection-title {
+            color: var(--color-text-dark);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 0.5rem;
+        }
+
+        /* ======================================================= */
+        /* 2. THẺ THỐNG KÊ (Stat Cards) */
+        /* ======================================================= */
+        .stat-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card-dash {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--color-primary-patient);
+            /* Mặc định Blue */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 120px;
+        }
+
+        .stat-card-dash h3 {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .stat-card-dash .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-primary-patient);
+            /* Mặc định Blue */
+            line-height: 1;
+        }
+
+        .stat-card-dash .stat-footer {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+
+        /* Màu tùy chỉnh cho các thẻ */
+        .card-appointment {
+            border-left-color: var(--color-primary-patient);
+        }
+
+        .card-results {
+            border-left-color: var(--color-accent-patient);
+        }
+
+        .card-medication {
+            border-left-color: var(--color-secondary-patient);
+        }
+
+        .card-appointment .stat-number {
+            color: var(--color-primary-patient);
+        }
+
+        .card-results .stat-number {
+            color: var(--color-accent-patient);
+        }
+
+        .card-medication .stat-number {
+            color: var(--color-secondary-patient);
+        }
+
+
+        /* ======================================================= */
+        /* 3. BẢNG DỮ LIỆU (Data Table) */
+        /* ======================================================= */
+        .data-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .data-card h2 {
+            font-size: 1.5rem;
+            color: var(--color-text-dark);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #E5E7EB;
+            padding-bottom: 0.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            text-align: left;
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .data-table th {
+            color: var(--color-text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        /* Button Action trong bảng (Đã điều chỉnh màu cho Bệnh nhân) */
+        .table-action-btn-patient {
+            background: #D1FAE5;
+            /* Green light */
+            color: #059669;
+            /* Green dark */
+            border: none;
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .table-action-btn-patient:hover {
+            background: #A7F3D0;
+        }
+
+        /* Status Badges */
+        .status-badge-patient {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-upcoming {
+            background-color: #DBEAFE;
+            color: #2563EB;
+        }
+
+        .status-confirmed {
+            background-color: #D1FAE5;
+            color: #059669;
+        }
+
+        .status-completed {
+            background-color: #FEF3C7;
+            color: #D97706;
+        }
+
+
+        /* ======================================================= */
+        /* 4. RESPONSIVE */
+        /* ======================================================= */
+        @media (max-width: 900px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                height: auto;
+            }
+
+            .stat-cards-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ======================================================= */
+        /* 5. CẬP NHẬT HEADER (Áp dụng phong cách Bác sĩ) */
+        /* ======================================================= */
+
+        .custom-header-dark {
+            background-color: var(--dark);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Branding */
+        .header-brand-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-brand-area .brand-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .header-brand-area .logo-sm {
+            width: 30px;
+            height: 30px;
+            margin-right: 0.75rem;
+        }
+
+        /* Actions Right (Giống cấu trúc Bác sĩ) */
+        .header-actions-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-actions-right .header-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .header-actions-right .header-link i {
+            margin-right: 0.5rem;
+        }
+
+        .header-actions-right .header-link:hover,
+        .header-actions-right .header-link.active {
+            color: white;
+        }
+
+        /* Style cho Notification Badge */
+        .notification-badge-patient {
+            background-color: var(--color-secondary-patient);
+            color: var(--color-text-dark);
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 9999px;
+            position: absolute;
+            top: 0.2rem;
+            right: -10px;
+        }
+
+        /* Dropdown và Avatar */
+        .profile-image-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--color-primary-patient);
+        }
+
+        /* Cấu trúc nút Profile */
+        .user-dropdown-toggle-patient {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            margin-left: 1.5rem;
+        }
+
+        .user-dropdown-toggle-patient img {
+            margin-right: 0.75rem;
+        }
+
+        /* Style cho nút hành động chính (Đặt Lịch Hẹn) */
+        .btn-header-primary {
+            padding: 0.65rem 1.4rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-header-primary-patient {
+            background-color: var(--color-primary-patient);
+            color: white;
+            border: 1px solid var(--color-primary-patient);
+        }
+
+        .btn-header-primary-patient:hover {
+            background-color: #2563EB;
+        }
+
+        :root {
+            --color-primary-patient: #3B82F6;
+            --color-secondary-patient: #F59E0B;
+            --color-accent-patient: #10B981;
+            --color-text-dark: #1F2937;
+            --color-text-light: #4B5563;
+            --color-background-light: #F9FAFB;
+            --dark: #091E3E;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--color-background-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Layout */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 120px);
+        }
+
+        .sidebar {
+            background-color: white;
+            padding: 1.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .container-wide {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Sidebar Nav */
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0.5rem;
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-weight: 500;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-nav li a i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+            color: var(--color-text-light);
+        }
+
+        .sidebar-nav li a:hover,
+        .sidebar-nav li a.active {
+            background-color: #EBF5FF;
+            color: var(--color-primary-patient);
+        }
+
+        .sidebar-nav li a.active i {
+            color: var(--color-primary-patient);
+        }
+
+        /* Content */
+        .content-area {
+            padding: 1rem 0;
+        }
+
+        .subsection-title {
+            color: var(--color-text-dark);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #E5E7EB;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Stat Cards */
+        .stat-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card-dash {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--color-primary-patient);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 120px;
+        }
+
+        .stat-card-dash h3 {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .stat-card-dash .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-primary-patient);
+            line-height: 1;
+        }
+
+        .stat-card-dash .stat-footer {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+
+        .card-appointment {
+            border-left-color: var(--color-primary-patient);
+        }
+
+        .card-appointment .stat-number {
+            color: var(--color-primary-patient);
+        }
+
+        .card-results {
+            border-left-color: var(--color-accent-patient);
+        }
+
+        .card-results .stat-number {
+            color: var(--color-accent-patient);
+        }
+
+        .card-medication {
+            border-left-color: var(--color-secondary-patient);
+        }
+
+        .card-medication .stat-number {
+            color: var(--color-secondary-patient);
+        }
+
+        /* Table Styles */
+        .data-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .data-card h2 {
+            font-size: 1.5rem;
+            color: var(--color-text-dark);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #E5E7EB;
+            padding-bottom: 0.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            text-align: left;
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .data-table th {
+            color: var(--color-text-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .table-action-btn-patient {
+            background: #D1FAE5;
+            color: #059669;
+            border: none;
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .table-action-btn-patient:hover {
+            background: #A7F3D0;
+        }
+
+        /* Status Badges */
+        .status-badge-patient {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-upcoming {
+            background-color: #DBEAFE;
+            color: #2563EB;
+        }
+
+        /* Pending - Xanh dương */
+        .status-confirmed {
+            background-color: #D1FAE5;
+            color: #059669;
+        }
+
+        /* Confirmed - Xanh lá */
+        .status-completed {
+            background-color: #FEF3C7;
+            color: #D97706;
+        }
+
+        /* Completed - Cam */
+        /* Thêm style cho trạng thái hủy */
+        .status-cancelled {
+            background-color: #FEE2E2;
+            color: #DC2626;
+        }
+
+        /* Canceled - Đỏ */
+
+        /* Header Styles */
+        .custom-header-dark {
+            background-color: var(--dark);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-brand-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-brand-area .brand-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .header-brand-area .logo-sm {
+            width: 30px;
+            height: 30px;
+            margin-right: 0.75rem;
+        }
+
+        .header-actions-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-actions-right .header-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .header-actions-right .header-link:hover,
+        .header-actions-right .header-link.active {
+            color: white;
+        }
+
+        .notification-badge-patient {
+            background-color: var(--color-secondary-patient);
+            color: var(--color-text-dark);
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 9999px;
+            position: absolute;
+            top: 0.2rem;
+            right: -10px;
+        }
+
+        .profile-image-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--color-primary-patient);
+        }
+
+        .user-dropdown-toggle-patient {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            margin-left: 1.5rem;
+        }
+
+        .btn-header-primary {
+            padding: 0.65rem 1.4rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-header-primary-patient {
+            background-color: var(--color-primary-patient);
+            color: white;
+            border: 1px solid var(--color-primary-patient);
+        }
+
+        .btn-header-primary-patient:hover {
+            background-color: #2563EB;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .btn-outline-primary {
+            border: 1px solid var(--color-primary-patient);
+            color: var(--color-primary-patient);
+        }
+
+        .btn-secondary-outline {
+            border: 1px solid var(--color-accent-patient);
+            color: var(--color-accent-patient);
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                height: auto;
+                display: none;
+                /* Ẩn tạm trên mobile */
+            }
+
+            .stat-cards-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="custom-header-dark">
+        <div class="header-inner container-wide" style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0;">
+            <div class="header-brand-area">
+                <a href="#" class="brand-link">
+                    <!-- Bạn có thể thay hình logo tại đây -->
+                    <i class="fa-solid fa-hospital-user logo-sm" style="font-size: 1.5rem; display: flex; align-items: center;"></i>
+                    <span class="brand-name">HealthSync Clinic</span>
+                </a>
+            </div>
+
+            <div class="header-actions-right">
+                <a href="index.html" class="header-link active"><i class="fa-solid fa-house"></i> Trang Chủ</a>
+                <a href="#" class="header-link news-link"><i class="fa-solid fa-bell"></i><span class="notification-badge-patient">1</span> Thông Báo</a>
+                <a href="appointment.html" class="btn btn-header-primary btn-header-primary-patient"><i class="fa-solid fa-calendar-plus"></i> Đặt Lịch Hẹn Mới</a>
+
+                <div class="user-profile-menu" style="position: relative; z-index: 1001;">
+                    <div class="dropdown">
+                        <button class="user-dropdown-toggle-patient" onclick="toggleDropdown(this)">
+                            <img src="https://ui-avatars.com/api/?name=User" alt="Avatar" class="profile-image-circle" id="header-avatar">
+                            <span id="header-username">Loading...</span> 
+                            <i class="fa-solid fa-caret-down dropdown-arrow" style="font-size: 0.75rem; margin-left: 0.5rem;"></i>
+                        </button>
+                        <div class="dropdown-content" style="display: none; position: absolute; top: 100%; right: 0; background-color: white; min-width: 200px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); border-radius: 8px; overflow: hidden; margin-top: 0.75rem;">
+                            <a href="#" class="dropdown-item" onclick="logout()" style="color: red; padding: 0.75rem 1.25rem; text-decoration: none; display: block;">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="bg-light">
+        <section class="section-container" style="padding-top: 2rem; padding-bottom: 4rem;">
+            <div class="container-wide dashboard-layout">
+
+                <aside class="sidebar">
+                    <div class="sidebar-nav">
+                        <ul>
+                            <li><a href="#" class="active"><i class="fa-solid fa-gauge-high"></i> Tổng Quan</a></li>
+                            <li><a href="#"><i class="fa-solid fa-calendar-check"></i> Lịch Hẹn Của Tôi</a></li>
+                            <li><a href="#"><i class="fa-solid fa-file-medical"></i> Hồ Sơ Sức Khỏe</a></li>
+                            <li><a href="#"><i class="fa-solid fa-file-waveform"></i> Kết Quả Xét Nghiệm</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <div class="content-area">
+                    <h1 class="subsection-title">Chào mừng, <span id="welcome-username">...</span>!</h1>
+
+                    <div class="stat-cards-grid">
+                        <div class="stat-card-dash card-appointment">
+                            <h3>Tổng lịch hẹn</h3>
+                            <p class="stat-number" id="total-appointments">0</p>
+                            <div class="stat-footer">Lịch hẹn trong hệ thống</div>
+                        </div>
+                        <div class="stat-card-dash card-results">
+                            <h3>Kết quả mới</h3>
+                            <p class="stat-number">2</p>
+                            <div class="stat-footer">Chờ xem: **Máu & X-quang**</div>
+                        </div>
+                        <div class="stat-card-dash card-medication">
+                            <h3>Đơn thuốc đang dùng</h3>
+                            <p class="stat-number">3</p>
+                            <div class="stat-footer">Cần mua lại: **Sau 7 ngày**</div>
+                        </div>
+                    </div>
+
+                    <!-- BẢNG DỮ LIỆU ĐỘNG -->
+                    <div class="data-card">
+                        <h2><i class="fa-solid fa-calendar-check"></i> Lịch Hẹn Của Bạn</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Thời gian</th>
+                                    <th>Bác sĩ</th>
+                                    <th>Chuyên khoa</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <!-- ID ĐƯỢC THÊM ĐỂ JS CHÈN DỮ LIỆU -->
+                            <tbody id="appointment-list-body">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 20px;">Đang tải dữ liệu...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="mt-4 text-center">
+                            <a href="#" class="btn btn-outline-primary">Xem toàn bộ Lịch hẹn</a>
+                        </div>
+                    </div>
+
+                    <!-- BẢNG TĨNH (GIỮ NGUYÊN) -->
+                    <div class="data-card">
+                        <h2><i class="fa-solid fa-file-waveform"></i> Kết Quả Xét Nghiệm Mới</h2>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã Xét Nghiệm</th>
+                                    <th>Ngày</th>
+                                    <th>Loại Xét Nghiệm</th>
+                                    <th>Tình trạng</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>KQ20251215</td>
+                                    <td>15/12/2025</td>
+                                    <td>Phân tích máu</td>
+                                    <td><span class="status-badge-patient status-confirmed">Đã Có</span></td>
+                                    <td><button class="table-action-btn-patient">Tải Về</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" style="background: white; padding: 20px 0; border-top: 1px solid #eee;">
+        <div class="footer-inner container-wide" style="text-align: center; color: #666;">
+            &copy; <span id="year-footer-dash">2023</span> HealthSync Clinic. All rights reserved.
+        </div>
+    </footer>
+     <!-- ======================================================= -->
+    <!-- JAVASCRIPT LOGIC GHÉP NỐI -->
+    <!-- ======================================================= -->
+    <script>
+        // Cập nhật năm footer
+        document.getElementById('year-footer-dash').textContent = new Date().getFullYear();
+
+        // Cấu hình API
+        const API = "http://localhost/DB"; // Đảm bảo URL này đúng với server của bạn
+
+        // 1. Kiểm tra đăng nhập từ LocalStorage
+        const user = JSON.parse(localStorage.getItem("user"));
+        
+        if (!user) {
+            // Nếu chưa đăng nhập, chuyển về trang login
+            window.location.href = "index.html";
+        } else {
+            // Nếu đã đăng nhập, hiển thị tên user lên giao diện
+            document.getElementById("header-username").innerText = user.username;
+            document.getElementById("welcome-username").innerText = user.username;
+            // Cập nhật avatar giả định theo tên
+            document.getElementById("header-avatar").src = `https://ui-avatars.com/api/?name=${user.username}&background=3B82F6&color=fff`;
+            
+            // Gọi hàm tải dữ liệu
+            loadAppointments();
+        }
+
+        // 2. Hàm gọi API và hiển thị dữ liệu
+        function loadAppointments() {
+            const tbody = document.getElementById("appointment-list-body");
+            const countDisplay = document.getElementById("total-appointments");
+
+            fetch(API + "/get_appointments.php?patient_id=" + user.patient_id)
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Lỗi: Không tải được dữ liệu!</td></tr>`;
+                        return;
+                    }
+
+                    const appointments = data.data;
+                    countDisplay.innerText = appointments.length; // Cập nhật số lượng trên thẻ thống kê
+
+                    if (appointments.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #666;">Chưa có lịch hẹn nào.</td></tr>`;
+                        return;
+                    }
+
+                    // Render danh sách (Tạo các thẻ <tr>)
+                    tbody.innerHTML = appointments.map(item => {
+                        // Xử lý hiển thị
+                        const statusInfo = getStatusStyle(item.status);
+                        const displayDate = formatDate(item.appointment_date);
+                        const displayTime = item.appointment_time.substring(0, 5); // Cắt giây (09:00:00 -> 09:00)
+
+                        return `
+                            <tr>
+                                <td>
+                                    <div style="font-weight: bold; color: var(--color-primary-patient)">${displayTime}</div>
+                                    <div style="font-size: 0.85rem; color: #666;">${displayDate}</div>
+                                </td>
+                                <td style="font-weight: 500;">${item.doctor_name}</td>
+                                <td>${item.specialty_name || item.department_name}</td>
+                                <td>
+                                    <span class="status-badge-patient ${statusInfo.className}">
+                                        ${statusInfo.text}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="table-action-btn-patient" onclick="alert('Xem chi tiết ID: ${item.id}')">
+                                        Chi Tiết
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    }).join("");
+                })
+                .catch(err => {
+                    console.error(err);
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Lỗi kết nối đến máy chủ!</td></tr>`;
+                });
+        }
+
+        // 3. Hàm phụ trợ: Map trạng thái API sang Class CSS giao diện
+        function getStatusStyle(status) {
+            switch(status) {
+                case "pending": 
+                    return { text: "Chờ duyệt", className: "status-upcoming" }; // Màu xanh dương
+                case "confirmed": 
+                    return { text: "Đã xác nhận", className: "status-confirmed" }; // Màu xanh lá
+                case "completed":
+                    return { text: "Đã hoàn thành", className: "status-completed" }; // Màu cam
+                case "canceled": 
+                    return { text: "Đã hủy", className: "status-cancelled" }; // Màu đỏ (đã thêm CSS)
+                default: 
+                    return { text: status, className: "status-upcoming" };
+            }
+        }
+
+        // 4. Hàm phụ trợ: Format ngày (YYYY-MM-DD -> DD/MM/YYYY)
+        function formatDate(dateString) {
+            if (!dateString) return "";
+            const [year, month, day] = dateString.split('-');
+            return `${day}/${month}/${year}`;
+        }
+
+        // Logic Dropdown User
+        function toggleDropdown(button) {
+            const dropdownContent = button.nextElementSibling;
+            dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function logout() {
+            localStorage.removeItem("user");
+            window.location.href = "index.html";
+        }
+
+        // Đóng dropdown khi click ra ngoài
+        window.onclick = function (event) {
+            if (!event.target.closest('.user-dropdown-toggle-patient')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    dropdowns[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

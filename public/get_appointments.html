@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lịch hẹn của tôi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-blue-50 p-6">
+
+    <h1 class="text-3xl font-bold text-blue-700 mb-4">
+        Lịch khám của <span id="username"></span>
+    </h1>
+
+    <div id="appointments" class="space-y-4"></div>
+
+    <script>
+        const API = "http://localhost/DB";
+
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) window.location.href = "index.html";
+
+        document.getElementById("username").innerText = user.username;
+
+        fetch(API + "/get_appointments.php?patient_id=" + user.patient_id)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.success) {
+                    alert("Không tải được dữ liệu!");
+                    return;
+                }
+
+                const box = document.getElementById("appointments");
+
+                if (data.data.length === 0) {
+                    box.innerHTML = `<p class="text-gray-500">Chưa có lịch hẹn nào.</p>`;
+                    return;
+                }
+                function translateStatus(status) {
+                switch(status) {
+                    case "pending": return "Chờ duyệt";
+                    case "confirmed": return "Đã xác nhận";
+                    case "canceled": return "Đã hủy";
+                    default: return status;
+                }
+            }
+
+                box.innerHTML = data.data.map(item => `
+                    <div class="bg-white shadow p-4 rounded border">
+                        <p><b>Bác sĩ:</b> ${item.doctor_name}</p>
+                        <p><b>Khoa:</b> ${item.department_name}</p>
+                        <p><b>Chuyên khoa:</b> ${item.specialty_name}</p>
+                        <p><b>Ngày khám:</b> ${item.appointment_date}</p>
+                        <p><b>Giờ khám:</b> ${item.appointment_time}</p>
+
+                        <span class="px-3 py-1 rounded text-white text-sm 
+                            ${item.status === 'pending' ? 'bg-yellow-500' : 
+                              item.status === 'confirmed' ? 'bg-green-600' : 'bg-red-600'}">
+                              ${translateStatus(item.status)}
+                        </span>
+                    </div>
+                `).join("");
+            });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,981 @@
+/* ======================================================= */
+/* 0. CÀI ĐẶT CƠ BẢN & BIẾN SỐ */
+/* ======================================================= */
+:root {
+    /* Màu sắc thương hiệu */
+    --color-primary: #0A7FAD;
+    /* Màu xanh nước biển đậm, chuyên nghiệp */
+    --color-secondary: #0D9488;
+    /* Màu xanh teal, tươi mới */
+    --color-accent: #FFC107;
+    /* Màu vàng, dùng cho nổi bật */
+    --color-text-dark: #1F2937;
+    --color-text-light: #4B5563;
+    --color-background-light: #F9FAFB;
+    --primary: #06A3DA;
+    --secondary: #F57E57;
+    --light: #EEF9FF;
+    --dark: #091E3E;
+    /* Font và khoảng cách */
+    --font-family-base: 'Roboto', Arial, sans-serif;
+    --spacing-default: 1.5rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-base);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+
+    background-image: url('../images/background.jpg');
+    background-repeat: no-repeat;
+    /* Không lặp lại */
+    background-size: cover;
+    /* Full màn hình */
+    background-position: center;
+    /* Căn giữa */
+    background-attachment: fixed;
+    /* Giữ cố định khi cuộn */
+
+    background-color: #f0f0f0;
+}
+
+
+.container-wide {
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Thêm lớp tiện ích khoảng cách (Spacing Utilities) */
+.mt-8 {
+    margin-top: 2rem !important;
+}
+
+.mt-12 {
+    margin-top: 3rem !important;
+}
+
+/* MỚI */
+.mb-4 {
+    margin-bottom: 1rem !important;
+}
+
+/* MỚI */
+.mb-8 {
+    margin-bottom: 2rem !important;
+}
+
+/* MỚI */
+.text-large {
+    font-size: 1.15rem;
+    /* CÂN ĐỐI: Tăng kích thước chữ cho đoạn mô tả */
+    color: var(--color-text-light);
+    line-height: 1.8;
+    max-width: 800px;
+    /* CÂN ĐỐI: Giới hạn chiều rộng văn bản */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ======================================================= */
+/* 1. THANH ĐIỀU HƯỚNG (HEADER) */
+/* ======================================================= */
+.site-header {
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-sm {
+    max-width: 40px;
+    height: auto;
+    margin-right: 0.5rem;
+}
+
+.brand-name {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--color-primary);
+}
+
+.main-nav a {
+    margin-left: var(--spacing-default);
+    color: var(--color-text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover {
+    color: var(--color-primary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-primary);
+}
+
+/* ======================================================= */
+/* 2. NÚT CHUNG (BUTTONS) */
+/* ======================================================= */
+.btn {
+    /* CHỈNH SỬA: Tăng padding và font-size để nút to và cân đối hơn */
+    padding: 0.85rem 1.8rem;
+    /* Thay vì 0.75rem 1.5rem */
+    border-radius: 9999px;
+    /* Pill shape */
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-size: 0.95rem;
+    /* Thay vì 0.9rem */
+}
+
+.btn-large {
+    /* CHỈNH SỬA: Tăng padding cho nút lớn */
+    padding: 1.1rem 2.2rem;
+    /* Thay vì 1rem 2rem */
+    font-size: 1.05rem;
+    /* Thay vì 1.0rem */
+}
+
+.btn-primary {
+    /* Được dùng cho CTA ĐĂNG KÝ/ĐẶT LỊCH HẸN */
+    background-color: var(--color-primary);
+    color: white;
+    border: 2px solid var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: #086a92;
+    border-color: #086a92;
+}
+
+.btn-outline-primary {
+    /* CHỈNH SỬA: Cân đối padding với .btn */
+    padding: 0.8rem 1.7rem;
+    /* Dùng cho các nút outline tiêu chuẩn (Ví dụ: Tìm hiểu thêm) */
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-link {
+    /* Dùng cho nút ĐĂNG NHẬP */
+    color: var(--color-text-light);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    background: none;
+    /* Đảm bảo không có nền khi chuyển từ <a> sang <button> */
+    border: none;
+    /* Đảm bảo không có border khi chuyển từ <a> sang <button> */
+    cursor: pointer;
+    /* Đảm bảo con trỏ chuột là pointer */
+}
+
+.btn-link:hover {
+    color: var(--color-primary);
+}
+
+.btn-outline-white {
+    /* Dùng cho nút outline trên Hero Section */
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-outline-white:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary-outline {
+    /* CHỈNH SỬA: Cân đối padding và border cho nút Xem Tất Cả Bài Viết */
+    background-color: transparent;
+    color: var(--color-text-dark);
+    border: 2px solid var(--color-text-light);
+    /* Thay 1px thành 2px */
+    padding: 0.85rem 1.8rem;
+    /* Cân đối với .btn */
+    border-radius: 9999px;
+    /* Đồng nhất hình dạng */
+}
+
+.btn-secondary-outline:hover {
+    background-color: var(--color-background-light);
+}
+
+
+/* ======================================================= */
+/* 3. HERO SECTION */
+/* ======================================================= */
+.hero-banner {
+    position: relative;
+    min-height: 480px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(31, 41, 55, 0.7);
+    /* Lớp phủ tối */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 700px;
+    padding: 2rem 0;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ======================================================= */
+/* 4. KHU VỰC CHUNG (SECTIONS) */
+/* ======================================================= */
+.section-container {
+    padding: 4rem 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.subsection-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+}
+
+.bg-light {
+    background-color: var(--color-background-light);
+}
+
+/* ======================================================= */
+/* 5. DỊCH VỤ (SERVICES) */
+/* ======================================================= */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    border-top: 4px solid;
+    transition: transform 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-primary);
+    /* Default icon color */
+}
+
+.service-card h4 {
+    font-size: 1.25rem;
+    color: var(--color-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.service-card p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+
+/* Màu border thẻ dịch vụ */
+.border-primary {
+    border-color: var(--color-primary);
+}
+
+.border-secondary {
+    border-color: var(--color-secondary);
+}
+
+.border-yellow {
+    border-color: #FFC107;
+}
+
+.border-red {
+    border-color: #DC3545;
+}
+
+.text-secondary {
+    color: var(--color-secondary);
+}
+
+.text-yellow {
+    color: #FFC107;
+}
+
+.text-red {
+    color: #DC3545;
+}
+
+
+/* ======================================================= */
+/* 6.1 ĐỘI NGŨ BÁC SĨ (DOCTORS) */
+/* ======================================================= */
+.doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.doctor-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    padding-bottom: 1.5rem;
+}
+
+.doctor-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.doctor-card h4 {
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+}
+
+.specialty {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+/* ======================================================= */
+/* 6.2 TIN TỨC (NEWS) */
+/* ======================================================= */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.news-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.news-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.news-content-box {
+    /* CHỈNH SỬA: Tăng padding bên trong box tin tức */
+    padding: 1.5rem 1.5rem;
+    /* Thay vì 1rem 1.25rem */
+}
+
+.news-date {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem;
+}
+
+.news-title-sm {
+    /* CHỈNH SỬA: Tăng nhẹ font size và khoảng cách dưới */
+    font-size: 1.15rem;
+    /* Thay vì 1.1rem */
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+}
+
+.read-more-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    /* CÂN ĐỐI: Tạo khoảng cách trên link */
+    display: inline-block;
+}
+
+
+/* ======================================================= */
+/* 7. LÝ DO CHỌN CHÚNG TÔI (WHY CHOOSE US) */
+/* ======================================================= */
+.why-choose-us-layout {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.why-left {
+    flex: 2;
+}
+
+.why-right {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.benefits-list {
+    list-style: none;
+    padding-left: 0;
+    color: var(--color-text-light);
+    margin-top: 1rem;
+}
+
+.benefits-list li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.benefits-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: bold;
+}
+
+.stat-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.stat-num {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.stat-desc {
+    color: var(--color-text-light);
+}
+
+/* ======================================================= */
+/* 8. TESTIMONIALS & CONTACT */
+/* ======================================================= */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.testimonials-area {
+    /* Đảm bảo flex-grow cho diện tích lớn hơn */
+    flex-grow: 1;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.test-card {
+    background: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-left: 3px solid var(--color-accent);
+}
+
+.quote {
+    font-style: italic;
+    color: var(--color-text-dark);
+    margin-bottom: 0.75rem;
+}
+
+.author {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.info-box {
+    background: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+.info-box p {
+    margin-bottom: 0.5rem;
+}
+
+.hotline-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.map-placeholder {
+    height: 180px;
+    background-color: #E5E7EB;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-light);
+}
+
+/* ======================================================= */
+/* 9. FOOTER */
+/* ======================================================= */
+.site-footer {
+    background-color: var(--color-text-dark);
+    color: white;
+    padding: 2.5rem 0 1.5rem 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.footer-col a:hover {
+    color: white;
+}
+
+.social-links a {
+    font-size: 1.25rem;
+    margin-right: 1rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* ======================================================= */
+/* 10. PHONG CÁCH CHUNG CHO TRANG ĐĂNG NHẬP/ĐĂNG KÝ (AUTH) */
+/* ======================================================= */
+
+.auth-body {
+    /* ĐÃ XÓA background-color để kế thừa ảnh nền từ body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    /* Kế thừa các style body cơ bản */
+    font-family: var(--font-family-base);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.brand-link-center {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-lg {
+    max-width: 50px;
+    margin-right: 0.5rem;
+}
+
+.auth-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.auth-subtitle {
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Form Styling */
+.auth-form {
+    margin-top: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(10, 127, 173, 0.2);
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.form-checkbox input[type="checkbox"] {
+    margin-right: 0.5rem;
+    /* Tùy chỉnh kích thước và màu sắc checkbox nếu cần */
+}
+
+/* Nút Submit */
+.w-full {
+    width: 100%;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+/* Footer Link */
+.auth-footer-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+}
+
+.text-primary {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.text-primary:hover {
+    text-decoration: underline;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.flex-row-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    /* Khoảng cách giữa checkbox và nút đăng nhập */
+}
+
+.auth-forgot-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* ======================================================= */
+/* 11. RESPONSIVE (Cho thiết bị di động) */
+/* ======================================================= */
+@media (max-width: 900px) {
+
+    .main-nav,
+    .header-actions {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-ctas {
+        flex-direction: column;
+    }
+
+    .why-choose-us-layout {
+        flex-direction: column;
+    }
+
+    .why-right {
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .doctors-grid,
+    .news-grid {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .header-actions .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .doctor-img {
+        height: 200px;
+    }
+
+    .message-box {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 18px;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+        z-index: 9999;
+    }
+
+    .message-box.success {
+        background-color: #4CAF50;
+    }
+
+    .message-box.error {
+        background-color: #f44336;
+    }
+
+    .message-box.info {
+        background-color: #2196F3;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 10%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .section-title h5::before {
+        position: absolute;
+        content: "";
+        width: 45px;
+        height: 3px;
+        right: -55px;
+        bottom: 11px;
+        background: var(--primary);
+    }
+
+    .section-title h5::after {
+        position: absolute;
+        content: "";
+        width: 15px;
+        height: 3px;
+        right: -75px;
+        bottom: 11px;
+        background: var(--secondary);
+    }
+
+    .hero-header {
+        background: linear-gradient(rgba(9, 30, 62, .85), rgba(9, 30, 62, .85)), url(../img/carousel-1.jpg) center center no-repeat;
+        background-size: cover;
+    }
+
+    .service-item img,
+    .service-item .bg-light,
+    .service-item .bg-light h5,
+    .team-item .team-text {
+        transition: .5s;
+    }
+
+    .service-item:hover img {
+        transform: scale(1.15);
+    }
+
+    .team-item .team-text::after,
+    .service-item .bg-light::after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        bottom: 0;
+        left: 15px;
+        right: 15px;
+        border-radius: 100px / 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, .7);
+        opacity: 0;
+        transition: .5s;
+        z-index: -1;
+    }
+
+    .team-item:hover .team-text::after,
+    .service-item:hover .bg-light::after {
+        opacity: 1;
+    }
+
+}
+

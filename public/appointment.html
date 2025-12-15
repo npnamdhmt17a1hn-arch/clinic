@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt lịch khám - HealthSync</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body class="bg-gradient-to-br from-blue-100 to-blue-50 min-h-screen p-6">
+
+    <h1 class="text-3xl font-bold text-blue-700 mb-6">
+        Xin chào <span id="username" class="text-blue-900"></span> 👋
+    </h1>
+
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-lg border border-blue-100">
+
+        <h2 class="text-2xl font-semibold mb-5 text-gray-800">📝 Thông tin đặt lịch khám</h2>
+
+        <div class="space-y-4">
+
+            <div>
+                <label class="block mb-1 font-medium">Chọn khoa</label>
+                <select id="department" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300"></select>
+            </div>
+
+            <div>
+                <label class="block mb-1 font-medium">Chọn chuyên khoa</label>
+                <select id="specialty" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300"></select>
+            </div>
+
+            <div>
+                <label class="block mb-1 font-medium">Chọn bác sĩ</label>
+                <select id="doctor" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300"></select>
+            </div>
+
+            <div>
+                <label class="block mb-1 font-medium">Ngày khám</label>
+                <input type="date" id="date" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300">
+            </div>
+
+            <div>
+                <label class="block mb-1 font-medium">Giờ khám</label>
+                <input type="time" id="time" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300">
+            </div>
+
+        </div>
+
+        <button id="btnBook"
+            class="w-full mt-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-xl font-bold hover:opacity-90 shadow-md">
+            🔔 Đặt lịch ngay
+        </button>
+
+    </div>
+
+    <script>
+        const API = "http://localhost/DB";
+
+        // LẤY USER TỪ LOCALSTORAGE
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) window.location.href = "index.html";
+
+        document.getElementById("username").innerText = user.username;
+
+        const deptEl = document.getElementById("department");
+        const specEl = document.getElementById("specialty");
+        const doctorEl = document.getElementById("doctor");
+
+        // Load departments
+        fetch(API + "/get_departments.php")
+            .then(res => res.json())
+            .then(data => {
+                deptEl.innerHTML = data.map(d => `<option value="${d.id}">${d.name}</option>`).join("");
+                loadSpecialties();
+            });
+
+        deptEl.addEventListener("change", loadSpecialties);
+
+        function loadSpecialties() {
+            fetch(API + `/get_specialties.php?department_id=${deptEl.value}`)
+                .then(res => res.json())
+                .then(data => {
+                    specEl.innerHTML = data.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
+                    loadDoctors();
+                });
+        }
+
+        specEl.addEventListener("change", loadDoctors);
+
+        function loadDoctors() {
+            fetch(API + `/get_doctors.php?specialty_id=${specEl.value}`)
+                .then(res => res.json())
+                .then(data => {
+                    doctorEl.innerHTML = data.map(d => `<option value="${d.id}">${d.fullname}</option>`).join("");
+                });
+        }
+
+        // --- ĐẶT LỊCH ---
+        document.getElementById("btnBook").addEventListener("click", function () {
+
+            const form = {
+                patient_id: user.patient_id,
+                department_id: deptEl.value,
+                specialty_id: specEl.value,
+                doctor_id: doctorEl.value,
+                date: document.getElementById("date").value,
+                time: document.getElementById("time").value
+            };
+
+            if (!form.date || !form.time) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Thiếu thông tin!",
+                    text: "Hãy chọn đầy đủ ngày và giờ khám nha 😊",
+                });
+                return;
+            }
+
+            fetch(API + "/create_appointment.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form)
+            })
+                .then(res => res.json())
+                .then(data => {
+
+                    if (data.success) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Đặt lịch thành công!",
+                            text: "Bạn sẽ được chuyển về trang chính.",
+                            timer: 1500,
+                            showConfirmButton: false
+                        });
+
+                        setTimeout(() => {
+                            window.location.href = "patient_dashboard.html";
+                        }, 1500);
+
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Lỗi!",
+                            text: data.message
+                        });
+                    }
+
+                })
+                .catch(err => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Lỗi kết nối!",
+                        text: err
+                    });
+                });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

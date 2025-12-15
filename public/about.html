@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về Chúng Tôi - Phòng khám Đông Đô</title>
+    <meta name="description" content="Tìm hiểu về lịch sử, sứ mệnh và đội ngũ bác sĩ tại Phòng khám Đông Đô.">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="icon" href="images/logo.png">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        /* CSS riêng cho trang con (Page Header) */
+        .page-header {
+            /* Bạn có thể thay đổi hình nền ở đây */
+            background: linear-gradient(rgba(9, 30, 62, 0.8), rgba(9, 30, 62, 0.8)), url('images/hero.jpg') center center no-repeat;
+            background-size: cover;
+            padding-top: 120px;
+            padding-bottom: 80px;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            justify-content: center;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        .breadcrumb-item a {
+            color: #ddd;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: #06A3DA; /* Màu primary */
+        }
+
+        /* CSS cho thẻ Tầm nhìn/Sứ mệnh */
+        .vision-item {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+            height: 100%;
+            transition: .3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .vision-item:hover {
+            transform: translateY(-5px);
+            border-bottom: 3px solid #06A3DA;
+        }
+
+        .vision-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(6, 163, 218, 0.1);
+            border-radius: 50%;
+            color: #06A3DA;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary m-1" role="status">
+            <span class="sr-only">Đang tải...</span>
+        </div>
+        <div class="spinner-grow text-dark m-1" role="status">
+            <span class="sr-only">Đang tải...</span>
+        </div>
+        <div class="spinner-grow text-secondary m-1" role="status">
+            <span class="sr-only">Đang tải...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- HEADER (Đã cập nhật link active) -->
+    <header class="site-header">
+        <div class="header-inner container-wide">
+            <a href="index.html" class="brand-link">
+                <img src="images/logo.png" alt="Logo" class="logo-sm">
+                <span class="brand-name">Phòng khám Đông Đô</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="index.html">Trang Chủ</a>
+                <!-- Class active cho trang hiện tại -->
+                <a href="about.html" class="active" style="color: #06A3DA; font-weight: 700;">Giới Thiệu</a>
+                <a href="index.html#services">Dịch Vụ</a>
+                <a href="doctors.html">Đội Ngũ Bác Sĩ</a>
+                <a href="contact.html">Liên Hệ</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="login.html" class="btn btn-link">Đăng nhập</a>
+                <a href="register.html" class="btn btn-primary">ĐĂNG KÝ</a>
+            </div>
+
+            <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Mở menu">☰</button>
+        </div>
+    </header>
+
+
+    <!-- PAGE HEADER START -->
+    <div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center">
+            <h1 class="display-4 animated slideInDown mb-4">Về Chúng Tôi</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Giới thiệu</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- PAGE HEADER END -->
+
+
+    <!-- ABOUT SECTION START -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5 wow zoomIn" data-wow-delay="0.1s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <!-- Ảnh giới thiệu -->
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="img/about.jpg" style="object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="section-title mb-4">
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Câu Chuyện Của Chúng Tôi</h5>
+                        <h1 class="display-5 mb-0">Hơn 10 Năm Chăm Sóc Sức Khỏe Cộng Đồng</h1>
+                    </div>
+                    <p class="mb-4" style="text-align: justify; font-size: 1.05rem;">
+                        Được thành lập với tâm huyết của các bác sĩ đầu ngành, <strong>Phòng khám Đông Đô</strong> luôn nỗ lực không ngừng để mang đến dịch vụ y tế chất lượng cao, chuẩn mực và tận tâm. Chúng tôi tin rằng mỗi bệnh nhân đều xứng đáng được chăm sóc như người thân trong gia đình.
+                    </p>
+                    <p class="mb-4" style="text-align: justify;">
+                        Với hệ thống trang thiết bị hiện đại nhập khẩu từ Châu Âu cùng quy trình khám chữa bệnh khép kín, chúng tôi cam kết mang lại kết quả chẩn đoán chính xác và phác đồ điều trị hiệu quả nhất.
+                    </p>
+                    
+                    <div class="row g-3">
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
+                            <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Bác sĩ chuyên khoa giỏi</h5>
+                            <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Thiết bị chẩn đoán 4.0</h5>
+                        </div>
+                        <div class="col-sm-6 wow zoomIn" data-wow-delay="0.6s">
+                            <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Phục vụ 24/7</h5>
+                            <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Chi phí minh bạch</h5>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex mt-4 wow zoomIn" data-wow-delay="0.6s">
+                        <a href="doctors.html" class="btn btn-primary py-3 px-5 me-3">Đội Ngũ Bác Sĩ</a>
+                        <a href="contact.html" class="btn btn-outline-primary py-3 px-5">Liên Hệ Ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ABOUT SECTION END -->
+
+
+    <!-- MISSION & VISION START -->
+    <div class="container-fluid py-5 bg-light wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="section-title text-center mb-5 pb-2">
+                <h5 class="position-relative d-inline-block text-primary text-uppercase">Giá Trị Cốt Lõi</h5>
+                <h1 class="display-5 mb-0">Kim Chỉ Nam Hoạt Động</h1>
+            </div>
+            <div class="row g-4">
+                <!-- Tầm nhìn -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="vision-item text-center">
+                        <div class="vision-icon mx-auto">
+                            <i class="fa fa-binoculars"></i>
+                        </div>
+                        <h3 class="mb-3">Tầm Nhìn</h3>
+                        <p>Trở thành hệ thống y tế tư nhân hàng đầu, là điểm tựa tin cậy về sức khỏe cho mọi gia đình Việt với tiêu chuẩn quốc tế.</p>
+                    </div>
+                </div>
+                <!-- Sứ mệnh -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="vision-item text-center">
+                        <div class="vision-icon mx-auto">
+                            <i class="fa fa-heartbeat"></i>
+                        </div>
+                        <h3 class="mb-3">Sứ Mệnh</h3>
+                        <p>Cung cấp dịch vụ chăm sóc sức khỏe toàn diện, hiệu quả và an toàn. Lấy người bệnh làm trung tâm trong mọi hoạt động.</p>
+                    </div>
+                </div>
+                <!-- Giá trị -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="vision-item text-center">
+                        <div class="vision-icon mx-auto">
+                            <i class="fa fa-hand-holding-heart"></i>
+                        </div>
+                        <h3 class="mb-3">Giá Trị Cốt Lõi</h3>
+                        <p><strong>Y Đức - Chuyên Nghiệp - Tận Tâm.</strong><br>Chúng tôi không chỉ chữa bệnh mà còn chữa lành sự lo âu của người bệnh.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MISSION & VISION END -->
+
+
+    <!-- STATS START (Thống kê) -->
+    <div class="container-fluid py-5 bg-primary text-white" style="margin: 50px 0;">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6 text-center wow fadeIn" data-wow-delay="0.1s">
+                    <i class="fa fa-user-md fa-3x mb-3 text-white"></i>
+                    <h1 class="display-4 text-white">50+</h1>
+                    <p class="fs-5">Bác Sĩ Chuyên Khoa</p>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center wow fadeIn" data-wow-delay="0.3s">
+                    <i class="fa fa-procedures fa-3x mb-3 text-white"></i>
+                    <h1 class="display-4 text-white">25k+</h1>
+                    <p class="fs-5">Lượt Khám Mỗi Năm</p>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center wow fadeIn" data-wow-delay="0.5s">
+                    <i class="fa fa-hospital-alt fa-3x mb-3 text-white"></i>
+                    <h1 class="display-4 text-white">10+</h1>
+                    <p class="fs-5">Năm Kinh Nghiệm</p>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center wow fadeIn" data-wow-delay="0.7s">
+                    <i class="fa fa-smile fa-3x mb-3 text-white"></i>
+                    <h1 class="display-4 text-white">99%</h1>
+                    <p class="fs-5">Bệnh Nhân Hài Lòng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- STATS END -->
+
+
+    <!-- FOOTER START -->
+    <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: 50px;">
+        <div class="container pt-5">
+            <div class="row g-5 pt-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Liên Kết Nhanh</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="index.html"><i class="bi bi-arrow-right text-primary me-2"></i>Trang Chủ</a>
+                        <a class="text-light mb-2" href="about.html"><i class="bi bi-arrow-right text-primary me-2"></i>Giới Thiệu</a>
+                        <a class="text-light mb-2" href="index.html#services"><i class="bi bi-arrow-right text-primary me-2"></i>Dịch Vụ</a>
+                        <a class="text-light mb-2" href="doctors.html"><i class="bi bi-arrow-right text-primary me-2"></i>Đội Ngũ Bác Sĩ</a>
+                        <a class="text-light" href="contact.html"><i class="bi bi-arrow-right text-primary me-2"></i>Liên Hệ</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Chuyên Khoa</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Nội Tổng Quát</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Nhi Khoa</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Tim Mạch</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Nha Khoa</a>
+                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Xét Nghiệm</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Thông Tin Liên Hệ</h3>
+                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>123 Đường ABC, Hà Nội, VN</p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>info@pkdongdo.com</p>
+                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+012 345 67890</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Theo Dõi Chúng Tôi</h3>
+                    <div class="d-flex">
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-light py-4" style="background: #051225;">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Phòng khám Đông Đô</a>. Bảo lưu mọi quyền.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER END -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
